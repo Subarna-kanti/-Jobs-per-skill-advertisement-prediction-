@@ -1,0 +1,19 @@
+ 1. Statistical analysis of training Dataset
+ 2. Searching of duplicate rows: there were numerous duplicate rows in training dataset on basis of three columns -> 'job_description', 'job_type', 'category', but later on decided to kept them because there were some rows which were having different category for same 'job_description', so removing duplicate rows may lead to bias in model trainig.
+ 3. String of each 'job_description' were not of English language and hence tried to translate all the strings to a common language 'English'
+ 4. For translation many translators were used such as **goslate, translator, textblob** they all able to translate only few strings but unable to do in bulk because of limit, and hence showing errors afterwards, so unable to use translator features but able to form keywords without translators
+ 5. Preprocessing of data: i) removal of unwanted sub-strings, letters, and symbols;     ii) converting all letters to lower case;    iii) remove sub-string part after apply now;     iv) Creating word tokens using **nltk.word_tokenize**     v) extracting nouns and relevant word tokens using **Partlabel encoder from sklearns of speech tagging**      vi) finally **lemmatize** word tokens
+ 6. Creating strings with the help of above processed word tokens and creating our bag of words using **Tokenizer in keras**  
+ 7. Using bag of words create our training vectors with the help of Tokenizer, and ground truth for them are 'job_type' and 'category' column
+ 8. Using same method created test feature vector from test dataset
+ 9. Problem is of classification type and hence training models used are: i) KNN (neighbors = 3); ii) Random Forest (forests = 10, 100);  iii) SVM
+ 10. Scores generates: i) knn = 69.65, ii) Random Forest = approx 58  iii) SVM = 72.77
+ 11. Also used XGBoost but takes huge ram and hence lead to system crash hence it is dropped
+ 12. Time taken by SVM is maximum for both training and testing
+ 13. Encoding is used in random forest as it cannot process with strings and only take input as numbers, encoding is done with **label encoder from sklearn**  which is later inverse for getting required resluts
+ 14. Results of random forest are not satisfactory
+ 15. Predict 'job_type' only in first model in knn and later on only focus on 'category' because 'job_type' is biased towards  permanent as we can see from graph and also because of huge training time for one prediction so just to save from system crash and time limitation category part is much more focused as given weightage also more
+ 16. **pickle** forms of training models and also intermediary results are saved in .csv files to save work
+ 17. **svm** model pickle is biggest in size **4.4 gb**
+
+
